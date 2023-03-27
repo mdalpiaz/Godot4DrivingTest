@@ -1,8 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bt1kxwvk7k6bm"]
+[gd_scene load_steps=9 format=3 uid="uid://d2xgl0yc2t3wm"]
 
-[ext_resource type="PackedScene" uid="uid://cax0qoxfkqtfp" path="res://race.glb" id="1_r3et7"]
-[ext_resource type="Script" path="res://car_controls.cs" id="2_dwq21"]
-[ext_resource type="Script" path="res://camera_lookat_pivot.cs" id="3_n3emr"]
+[ext_resource type="PackedScene" uid="uid://cpbfbhi3eeni3" path="res://assets/player.tscn" id="1_8rie3"]
 
 [sub_resource type="Sky" id="Sky_gelao"]
 
@@ -10,9 +8,6 @@
 background_mode = 1
 background_color = Color(0.8, 0.8, 0.8, 1)
 sky = SubResource("Sky_gelao")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ccnpb"]
-size = Vector3(1, 0.678011, 2.56612)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7ee0"]
 albedo_color = Color(0.184314, 0.184314, 0.184314, 1)
@@ -35,20 +30,7 @@ points = PackedVector3Array(2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_l50fl")
 
-[node name="car" type="Node3D" parent="."]
-
-[node name="car_model" parent="car" instance=ExtResource("1_r3et7")]
-script = ExtResource("2_dwq21")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="car/car_model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347507, 0)
-shape = SubResource("BoxShape3D_ccnpb")
-
-[node name="camera_lookat_pivot" type="Node3D" parent="car/car_model"]
-script = ExtResource("3_n3emr")
-
-[node name="camera" type="Camera3D" parent="car/car_model/camera_lookat_pivot"]
-transform = Transform3D(1, 0, 0, 0, 0.980615, 0.195946, 0, -0.195946, 0.980615, 0, 1.78013, 4.61178)
+[node name="car" parent="." instance=ExtResource("1_8rie3")]
 
 [node name="World" type="Node3D" parent="."]
 

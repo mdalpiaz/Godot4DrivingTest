@@ -4,16 +4,16 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cax0qoxfkqtfp"
-path="res://.godot/imported/race.glb-3b481ed492939f510479c700dec1e849.scn"
+path="res://.godot/imported/race.glb-fffc378f23aede142e6635ad2e23f1cc.scn"
 
 [deps]
 
-source_file="res://race.glb"
-dest_files=["res://.godot/imported/race.glb-3b481ed492939f510479c700dec1e849.scn"]
+source_file="res://assets/cars/race.glb"
+dest_files=["res://.godot/imported/race.glb-fffc378f23aede142e6635ad2e23f1cc.scn"]
 
 [params]
 
-nodes/root_type="RigidBody3D"
+nodes/root_type="CharacterBody3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
