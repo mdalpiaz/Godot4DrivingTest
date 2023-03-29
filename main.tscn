@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2xgl0yc2t3wm"]
+[gd_scene load_steps=9 format=3 uid="uid://duu7ie25oyih6"]
 
-[ext_resource type="PackedScene" uid="uid://cpbfbhi3eeni3" path="res://assets/player.tscn" id="1_8rie3"]
+[ext_resource type="PackedScene" uid="uid://rh1y37ku3av4" path="res://player.tscn" id="1_wuvva"]
 
 [sub_resource type="Sky" id="Sky_gelao"]
 
@@ -30,8 +30,6 @@ points = PackedVector3Array(2.5, 2.5, 2.5, 2.5, 2.5, -2.5, -2.5, 2.5, 2.5, 2.5, 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_l50fl")
 
-[node name="car" parent="." instance=ExtResource("1_8rie3")]
-
 [node name="World" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
@@ -54,3 +52,5 @@ mesh = SubResource("BoxMesh_ife3s")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ramp"]
 transform = Transform3D(1, 0, 0, 0, 0.853078, -0.521784, 0, 0.521784, 0.853078, 0, -1.07572, -11.8939)
 shape = SubResource("ConvexPolygonShape3D_8w0fs")
+
+[node name="car_model" parent="." instance=ExtResource("1_wuvva")]
