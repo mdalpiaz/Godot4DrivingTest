@@ -15,8 +15,11 @@ var speed = 0.0
 func _ready():
 	velocity = Vector3.ZERO
 
+func _process(delta):
+	pass
+
 func _physics_process(delta):
-	velocity = Vector3.ZERO
+	print(velocity)
 	velocity.y = -gravity
 #	if !is_on_floor():
 #		print("airbourne")
@@ -29,11 +32,12 @@ func _physics_process(delta):
 
 	speed = lerp(speed, 0.0, FRICTION * delta)
 	var steering = Input.get_axis("right", "left")
-	steer_wheels(steering * speed * STEERING_SENSITIVITY * delta)
+	steer_wheels(steering * speed * STEERING_SENSITIVITY)
 	rotate_y(steering * STEERING_SENSITIVITY * speed * delta)
 #	velocity += 
 	move_and_slide()
 
 func steer_wheels(angle):
-	left_wheel.rotation.y = (angle + deg_to_rad(180.0)) * 5
-	right_wheel.rotation.y = angle * 5
+	angle *= 0.08
+	left_wheel.rotation.y = (angle + deg_to_rad(180.0))
+	right_wheel.rotation.y = angle
