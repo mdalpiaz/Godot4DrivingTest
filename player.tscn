@@ -201,10 +201,11 @@ shadow_mesh = SubResource("ArrayMesh_3srpv")
 [sub_resource type="BoxShape3D" id="BoxShape3D_1kqk6"]
 size = Vector3(1.28867, 1.1, 2.56322)
 
-[node name="car_model" type="CharacterBody3D" node_paths=PackedStringArray("left_wheel", "right_wheel")]
+[node name="car_model" type="CharacterBody3D" node_paths=PackedStringArray("left_wheel", "right_wheel", "car_model")]
 script = ExtResource("1_tj5ju")
 left_wheel = NodePath("race2/wheel_frontLeft")
 right_wheel = NodePath("race2/wheel_frontRight")
+car_model = NodePath("race2")
 
 [node name="race2" type="Node3D" parent="."]
 

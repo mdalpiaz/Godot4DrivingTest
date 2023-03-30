@@ -5,6 +5,7 @@ var gravity_vector: Vector3 = ProjectSettings.get_setting("physics/3d/default_gr
 
 @export var left_wheel: Node3D
 @export var right_wheel: Node3D
+@export var car_model: Node3D
 
 const FRICTION = 20.0
 const MAX_SPEED = 25.0
@@ -24,7 +25,6 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	print("speed: ", velocity.length_squared())
 	velocity += _invert_vector(velocity).normalized() * FRICTION * delta
 	if Input.get_action_strength("forward"):
 		velocity += -global_transform.basis.z * ACCELERATION * delta
@@ -33,11 +33,19 @@ func _physics_process(delta):
 	velocity = velocity.limit_length(20)
 
 	steering = Input.get_axis("right", "left")
+	
+	print(car_model.rotation)
 	print(get_floor_normal())
 	var steer_angle = steering * STEERING_SENSITIVITY * delta
 	rotate_y(steer_angle)
 	velocity = velocity.rotated(Vector3.UP, steer_angle)
 	move_and_slide()
+
+func _align_with_y(xform, new_y):
+	xform.basis.y = new_y
+	xform.basis.x = -xform.basis.z.cross(new_y)
+	xform.basis = xform.basis.orthonormalized()
+	return xform
 
 func _angle_wheels(angle):
 	angle *= 0.75
