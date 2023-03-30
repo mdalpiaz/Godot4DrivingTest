@@ -20,21 +20,21 @@ func _process(_delta):
 
 func _physics_process(delta):
 	velocity += gravity_vector * gravity * delta
+	steering = Input.get_axis("right", "left")
+	var forward = Input.get_action_strength("forward")
+	var backward = Input.get_action_strength("backward")
 	if !is_on_floor():
-		steering = Input.get_axis("right", "left")
 		move_and_slide()
 		return
 
 	velocity += _invert_vector(velocity).normalized() * FRICTION * delta
-	if Input.get_action_strength("forward"):
-		velocity += -global_transform.basis.z * ACCELERATION * delta
-	elif Input.get_action_strength("backward"):
-		velocity += global_transform.basis.z * ACCELERATION * delta
+	
+	velocity += -global_transform.basis.z * ACCELERATION * forward * delta
+	velocity += global_transform.basis.z * ACCELERATION * backward * delta
 	velocity = velocity.limit_length(20)
 
 	print(car_model.rotation)
-	print(get_floor_normal())
-	car_model.rotation = car_model.rotation.lerp(get_floor_normal(), CAR_TO_FLOOR_ROTATION_SPEED * delta)
+	print(get_slide_collision(0).get)
 	var steer_angle = steering * STEERING_SENSITIVITY * delta
 	rotate_y(steer_angle)
 	velocity = velocity.rotated(Vector3.UP, steer_angle)
