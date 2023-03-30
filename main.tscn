@@ -34,6 +34,7 @@ environment = SubResource("Environment_l50fl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.726575, 0.687088, 0, -0.687088, 0.726575, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="World"]
 
