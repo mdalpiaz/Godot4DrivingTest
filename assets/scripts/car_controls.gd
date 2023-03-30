@@ -9,9 +9,9 @@ var gravity_vector: Vector3 = ProjectSettings.get_setting("physics/3d/default_gr
 
 const FRICTION = 20.0
 const MAX_SPEED = 25.0
-const ACCELERATION = 50.0
+const ACCELERATION = 60.0
 const STEERING_SENSITIVITY = 4.0
-const CAR_TO_FLOOR_ROTATION_SPEED = 4.0
+const FLOOR_ALIGN_SPEED = 10.0
 
 var steering = 0.0
 
@@ -33,8 +33,11 @@ func _physics_process(delta):
 	velocity += global_transform.basis.z * ACCELERATION * backward * delta
 	velocity = velocity.limit_length(20)
 
-	print(car_model.rotation)
-	print(get_slide_collision(0).get)
+	# but why does this work?
+	var xform = _align_with_y(car_model.global_transform, get_floor_normal())
+	car_model.global_transform = car_model.global_transform.interpolate_with(xform, FLOOR_ALIGN_SPEED * delta)
+	car_model.rotation.y = 0.0
+	
 	var steer_angle = steering * STEERING_SENSITIVITY * delta
 	rotate_y(steer_angle)
 	velocity = velocity.rotated(Vector3.UP, steer_angle)
