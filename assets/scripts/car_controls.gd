@@ -11,8 +11,8 @@ const FRICTION = 20.0
 const MAX_SPEED = 25.0
 const ACCELERATION = 50.0
 const STEERING_SENSITIVITY = 4.0
+const CAR_TO_FLOOR_ROTATION_SPEED = 4.0
 
-var speed = 0.0
 var steering = 0.0
 
 func _process(_delta):
@@ -21,7 +21,7 @@ func _process(_delta):
 func _physics_process(delta):
 	velocity += gravity_vector * gravity * delta
 	if !is_on_floor():
-		steering = 0.0
+		steering = Input.get_axis("right", "left")
 		move_and_slide()
 		return
 
@@ -32,10 +32,9 @@ func _physics_process(delta):
 		velocity += global_transform.basis.z * ACCELERATION * delta
 	velocity = velocity.limit_length(20)
 
-	steering = Input.get_axis("right", "left")
-	
 	print(car_model.rotation)
 	print(get_floor_normal())
+	car_model.rotation = car_model.rotation.lerp(get_floor_normal(), CAR_TO_FLOOR_ROTATION_SPEED * delta)
 	var steer_angle = steering * STEERING_SENSITIVITY * delta
 	rotate_y(steer_angle)
 	velocity = velocity.rotated(Vector3.UP, steer_angle)
